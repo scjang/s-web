@@ -7,7 +7,6 @@ const api = require('./controllers/api');
 const mobile = require('is-mobile');
 const path = require('path');
 const request = require('request');
-const _ = require('underscore');
 
 function getLocals (req, res, next) {
   req.app.locals.host = req.headers.host;

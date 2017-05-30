@@ -1,0 +1,21 @@
+.Spinner {
+	position: relative;
+	opacity: .99;
+}
+
+.Spinner.loading {
+	height:50px;
+	padding-top:1px;
+}
+
+.Spinner.loading > div {
+	width:0px;
+}
+
+.Spinner.loaded {
+	height: 50px;
+	background-image:url(/images/spinner.png) ;
+	background-size:29px 25px;
+	background-repeat:no-repeat;
+	background-position:center center;
+}

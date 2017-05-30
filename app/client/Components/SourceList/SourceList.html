@@ -1,0 +1,7 @@
+<script type="text/template" id="SourceList">
+<div class="scrollable_content"></div>
+	
+<% var containerId = _.uniqueId('component_'); %>
+<div id="<%=containerId%>"></div>
+<% this.addChildFromTemplate(containerId, this.spinner); %>
+</script>

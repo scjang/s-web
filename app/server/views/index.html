@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title><%=env.serverInfo.app_name%></title>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=Edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+	
+	<link rel="apple-touch-icon" sizes="57x57" href="/images/favicon/apple-icon-57x57.png">
+	<link rel="apple-touch-icon" sizes="60x60" href="/images/favicon/apple-icon-60x60.png">
+	<link rel="apple-touch-icon" sizes="72x72" href="/images/favicon/apple-icon-72x72.png">
+	<link rel="apple-touch-icon" sizes="76x76" href="/images/favicon/apple-icon-76x76.png">
+	<link rel="apple-touch-icon" sizes="114x114" href="/images/favicon/apple-icon-114x114.png">
+	<link rel="apple-touch-icon" sizes="120x120" href="/images/favicon/apple-icon-120x120.png">
+	<link rel="apple-touch-icon" sizes="144x144" href="/images/favicon/apple-icon-144x144.png">
+	<link rel="apple-touch-icon" sizes="152x152" href="/images/favicon/apple-icon-152x152.png">
+	<link rel="apple-touch-icon" sizes="180x180" href="/images/favicon/apple-icon-180x180.png">
+	<link rel="icon" type="image/png" sizes="192x192"  href="/images/favicon/android-icon-192x192.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="96x96" href="/images/favicon/favicon-96x96.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/images/favicon/manifest.json">
+	<meta name="msapplication-TileColor" content="#ffffff">
+	<meta name="msapplication-TileImage" content="/images/favicon/ms-icon-144x144.png">
+	<meta name="theme-color" content="#ffffff">
+
+	<script type="text/javascript">
+		<%- include include/LAB.js %>
+		<%- include include/json2.js %>
+		<%- include include/spin.js %>
+	
+		var env = <%- JSON.stringify(env) %>;
+		
+		(function () {
+			
+			var root = this;
+
+			var loadingSpinner;
+			function showLoadingSpinner () {
+				if (document.addEventListener) {
+					document.addEventListener("DOMContentLoaded", function () {
+						var color = "#4b5c66";
+						var opts = {
+							lines: 12,
+							length: 4,
+							width: 2,
+							radius: 5, 
+							color: color,
+							speed: 1,
+							trail: 60,
+							shadow: false,
+							top: "auto",
+							left: "auto"
+						};
+						loadingSpinner = document.createElement("div");
+						loadingSpinner.id = "loading";
+						loadingSpinner.style.position = "fixed";
+						loadingSpinner.style.top = "50%";
+						loadingSpinner.style.left = "50%";
+						var spinner = new Spinner(opts);
+						document.body.appendChild(loadingSpinner);
+						spinner.spin(loadingSpinner);
+					});
+				} 
+			}
+
+			function hideLoadingSpinner() {
+				if (typeof loadingSpinner != "undefined") {
+					document.body.removeChild(loadingSpinner);
+				}
+			}
+
+			function flattenList (list) {
+
+				if (!list) {
+					return [];
+				}
+
+				var len = list.length;
+				var flattened = [];
+				var resourceBase = '//' + window.location.host + '/';
+
+				for (var i = 0; i < len; i++) {
+					flattened.push(resourceBase + list[i]);
+				}
+
+				return flattened;
+			}
+
+			var injected_styles = {};
+			function loadStyles(target, options) {
+				var headEl = document.getElementsByTagName("head")[0];
+				var files, numFiles, el;
+				
+				setTimeout(function() {
+					numFiles = target.length;
+					files = flattenList(target);
+					for (var i = 0; i < numFiles; i++) {
+						if (injected_styles[files[i]]) {
+							continue
+						}
+						el = document.createElement("link");
+						el.rel = "stylesheet";
+						el.type = "text/css";
+						el.href = files[i];
+						injected_styles[files[i]] = true;
+						headEl.appendChild(el)
+					}
+				}, 0)
+			}
+
+			function loadJavascript(target) {
+				
+				var fileList = flattenList(target);
+
+				console.time('loading.js');
+				showLoadingSpinner();
+				var promise = $LAB.setOptions({
+					AlwaysPreserveOrder: true
+				}).script(fileList);
+
+				promise.wait(function () {
+					
+					console.timeEnd("loading.js");
+					
+					hideLoadingSpinner();
+					
+					// Excute S.Services callbacks
+					// triggering 'ready' event for all services
+					_.each(initProxyCallbacks, function (cb) {
+						cb();
+					});
+					initProxyCallbacks = null;
+
+					try {
+						eval("S.appInit").call(root)
+					} catch (err) {
+						console.error(err.stack)
+					}
+
+				});
+			}
+			
+			root.S = root.S || {};
+			
+			/* S.getEventProxy */
+			var proxies = {};
+			var initProxyCallbacks = [];
+			try {
+				root.S.getEventProxy = root.parent.S.getEventProxy || function (proxyName, cb) {
+					function callCallback() {
+						if (!proxies[proxyName]) {
+							proxies[proxyName] = _.extend({}, Backbone.Events);
+						}
+						cb(proxies[proxyName]);
+					}
+
+					if (window._ && window.Backbone) {
+						callCallback();
+					} else {
+						initProxyCallbacks.push(callCallback);
+					}
+				}
+			} catch (e) {
+				root.S.getEventProxy = function () {};
+			}
+
+			S.boot = function (app, options) {
+				loadJavascript(env.dependencies);
+				loadStyles(env.css);
+			}
+
+			S.boot('ccpm');
+
+		}).call(this);
+	</script>
+	<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', env.serverInfo.google_tracking_id, 'auto');
+  ga('send', 'pageview');
+
+	</script>
+</head>
+<body></body>
+</html>

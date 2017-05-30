@@ -1,0 +1,19 @@
+<script type="text/template" id="Dropdown">
+<div class="dropdown">
+	<ul class="dropdown_menu">
+		<%_.each(this.model.models, function (model) { %>
+			<% if (model.get('divider')) { %>
+				<li role="separator" class="divider"></li> 
+			<% } else { %>
+				<li>
+					<% if (!_.isUndefined(model.get('target'))) { %>
+					<a href="<%=model.get('link')%>" target="<%=model.get('target')%>"><%=model.get('text')%></a>
+					<% } else { %>
+					<a href="<%=model.get('link')%>"><%=model.get('text')%></a>
+					<% } %>
+				</li>
+			<% } %>
+		<% }, this); %>
+	</ul>
+</div>
+</script>

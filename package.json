@@ -2,6 +2,7 @@
   "name": "S",
   "version": "2.1.0",
   "description": "S framework",
+  "author": "Jaecheol Lee <jclee.dev@gmail.com> (https://afrobambacar.github.io)",
   "main": "app/server/app.js",
   "scripts": {},
   "engines": {

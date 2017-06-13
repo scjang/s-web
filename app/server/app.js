@@ -1,6 +1,5 @@
 'use strict';
 
-// NODE_ENV는 서버 시작시 arguments를 받는다.
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 
 const express = require('express');

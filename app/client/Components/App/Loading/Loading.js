@@ -11,5 +11,5 @@
 		stop: function () {
 			this.spinner.stop();
 		}
-	})
+	});
 })();

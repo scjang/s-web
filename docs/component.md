@@ -22,27 +22,27 @@ SPA의 특성상 사용자가 웹앱에 접근했을 때 서버에서는 `index.
 
 클라이언트는 API 호출 시 S의 서버사이드에 위임합니다. 따라서 서버에서는 실제 API 주소가 미리 정의된 객체를 가져야 할 필요가 있습니다. 이것은 `api_map.js`에 정의하며 다음과 같이 생겼습니다.
 
-`
+```
 module.exports = {
   createAccount: {
     url: config.api_server + '/account/create',
     method: 'POST'
   }
 };
-`
+```
 
 위의 예제에서는 `createAccount`가 정의되어 있습니다. `createAccount` 는 실제 api의 주소와 method를 가집니다. 클라이언트에서 `/api/do/createAccount`로 호출을 하게 될 경우 서버사이드에서는 정의된 url과 method의 정보를 가지고 `Request` 모듈로 호출을 한 후 결과를 클라이언트에 전달하게 됩니다.
 
 여기서 url은 Restful을 고려하여 다음과 같이 작성할 수도 있습니다.
 
-`
+```
 module.exports = {
   getAlbum: {
     url: config.api_server + '/albume/:id',
     method: 'GET'
   }
 };
-`
+```
 
 Api를 위임받아 처리하는 api 모듈은 `:id` 부분을 클라이언트에서 넘긴 `id` 파라미터의 값으로 변경하여 호출한 후 결과를 다시 클라이언트에 전달합니다.
 

@@ -8,11 +8,15 @@
   paths = gulp.paths;
   del = require('del');
 
-  gulp.task('clean:all', function (k) {
+  gulp.task('clean:tmp', function (done) {
+    return del([paths.tmp.app], done);
+  });
+
+  gulp.task('clean:all', function (done) {
     return del([
       paths.dist,
       paths.tmp.root
-    ], k);
+    ], done);
   });
 
   gulp.task('clean:app', function () {

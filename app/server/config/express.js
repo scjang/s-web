@@ -54,9 +54,9 @@ module.exports = function (app) {
       ]
     };
   } else if ('development' === env || 'test' === env) {
-    app.use(favicon(path.join(config.root, '/app/client/images/favicon', 'favicon.ico')));
-    app.use(express.static(path.join(config.root, '/app/client')));
-    app.set('appPath', path.join(config.root, '/app/client'));
+    app.use(favicon(path.join(config.root, '/.tmp/app/client/images/favicon', 'favicon.ico')));
+    app.use(express.static(path.join(config.root, '/.tmp/app/client')));
+    app.set('appPath', path.join(config.root, '/.tmp/app/client'));
     
     app.use(errorHandler()); // Error handler - has to be last
     

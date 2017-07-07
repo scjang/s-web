@@ -1,12 +1,10 @@
 (function () {
 	'use strict';
 
-	var gulp, paths, $;
+	var gulp, paths, $, sass;
 
 	gulp = require('gulp');
-
 	paths = gulp.paths;
-
 	$ = require('gulp-load-plugins')();
 
 	/**
@@ -15,7 +13,8 @@
 	 * 그냥 일반 css 파일일 경우 그냥 .tmp로 이동
 	 */
 	gulp.task('styles', function () {
-		
+		return gulp.src([paths.app + '/**/*.scss'])
+			.pipe($.sass({outputStyle: 'compressed'}).on('error', $.sass.logError))
+			.pipe(gulp.dest(paths.tmp.app));
 	});
-
 })();

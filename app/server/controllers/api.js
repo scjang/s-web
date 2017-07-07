@@ -82,7 +82,7 @@ function proxy (req, res, next) {
 		if (!body) return res.status(500);
 
 		if (config.env !== 'production') {
-			console.log('.......... api proxy start .............')
+			console.log('.......... api proxy start .............');
 			console.log('[start] %j', options);
 			console.log('[error] %j', error);
 			console.log('[status_code] %j', response.statusCode);
@@ -134,8 +134,8 @@ function getNewToken (req, res, next) {
 				return res.status(response.statusCode).json(body.data);
 			}
 			return res.status(response.statusCode).json(body);
-		})
-	})
+		});
+	});
 }
 
 exports.extractTokens = extractTokens;

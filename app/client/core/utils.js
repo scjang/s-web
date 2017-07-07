@@ -120,47 +120,6 @@
     },
 
 		/**
-		 * S.Utils#login(redirectUrl) -> undefined
-		 * - redirectUrl (string): 되돌아갈 페이지의 주소
-		 * 
-		 * 로그인 페이지로 이동시킵니다.
-		 * 이동 전에 로컬스토리지에 카트, 재생목록 정보를 저장해두고
-		 * redirectUrl이 없는 경우 URL을 확인하여 되돌아올 페이지 값으로 넘깁니다.
-		 */
-		login: function (redirectUrl) {
-
-			// 페이지 넘어가기전에 저장될 정보들 ( cart, player관련..)
-			try {
-				S.app.localStorage.save( true );
-			}catch(e){}
-
-			// https인 경우 http로 수정.
-			if (!redirectUrl){
-				redirectUrl = window.location.href.split('https://').join('http://');
-			}
-			
-			if (S.serverInfo.get('ssl')) {
-				S.Utils.goSSLLink('/account/login?url=' + S.Utils.Base64.encode(redirectUrl));
-			} else {
-				S.Utils.goLink('/account/login?url=' + S.Utils.Base64.encode(redirectUrl));	
-			}
-		},
-
-		/**
-		 * S.Utils#logout(redirectUrl) -> undefined
-		 * - redirectUrl (string): 되돌아갈 페이지 주소
-		 *
-		 * 로그아웃 처리 함수입니다.
-		 */
-		logout: function (redirectUrl) {
-			// if (!redirectUrl){
-			// 	redirectUrl = window.location.href.split('https://').join('http://');
-			// }
-			// S.Utils.goLink('/account/logout?url=' + S.Utils.Base64.encode(redirectUrl));
-			S.Utils.goLink('/account/logout');
-		},
-
-		/**
 		 * S.Utils#getRouteURL() -> string
 		 * 
 		 * 현재 위치해 있는 S.Route의 URL을 반환합니다.
@@ -466,15 +425,4 @@
 			Cookies.remove(n);
 		}
 	};
-
-	/**
-	 *  @description string 문자열 인코딩 관련
-	 *  @namespace
-	 */
-	S.Utils.Base64={
-		_keyStr:"ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=",encode:function(a){for(var d="",c,b,f,g,h,e,i=0,a=S.Utils.Base64._utf8_encode(a);i<a.length;)c=a.charCodeAt(i++),b=a.charCodeAt(i++),f=a.charCodeAt(i++),g=c>>2,c=(c&3)<<4|b>>4,h=(b&15)<<2|f>>6,e=f&63,isNaN(b)?h=e=64:isNaN(f)&&(e=64),d=d+this._keyStr.charAt(g)+this._keyStr.charAt(c)+this._keyStr.charAt(h)+this._keyStr.charAt(e);return d},decode:function(a){for(var d="",c,b,f,g,h,e=0,a=a.replace(/[^A-Za-z0-9\+\/\=]/g,"");e<
-	a.length;)c=this._keyStr.indexOf(a.charAt(e++)),b=this._keyStr.indexOf(a.charAt(e++)),g=this._keyStr.indexOf(a.charAt(e++)),h=this._keyStr.indexOf(a.charAt(e++)),c=c<<2|b>>4,b=(b&15)<<4|g>>2,f=(g&3)<<6|h,d+=String.fromCharCode(c),g!=64&&(d+=String.fromCharCode(b)),h!=64&&(d+=String.fromCharCode(f));return d=S.Utils.Base64._utf8_decode(d)},_utf8_encode:function(a){for(var a=a.replace(/\r\n/g,"\n"),d="",c=0;c<a.length;c++){var b=a.charCodeAt(c);b<128?d+=String.fromCharCode(b):(b>127&&b<2048?d+=String.fromCharCode(b>>
-	6|192):(d+=String.fromCharCode(b>>12|224),d+=String.fromCharCode(b>>6&63|128)),d+=String.fromCharCode(b&63|128))}return d},_utf8_decode:function(a){for(var d="",c=0,b=c1=c2=0;c<a.length;)b=a.charCodeAt(c),b<128?(d+=String.fromCharCode(b),c++):b>191&&b<224?(c2=a.charCodeAt(c+1),d+=String.fromCharCode((b&31)<<6|c2&63),c+=2):(c2=a.charCodeAt(c+1),c3=a.charCodeAt(c+2),d+=String.fromCharCode((b&15)<<12|(c2&63)<<6|c3&63),c+=3);return d}};
-
-
 })(jQuery, window.S = window.S || {}, window.Cookies);

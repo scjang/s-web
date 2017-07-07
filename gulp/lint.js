@@ -8,7 +8,13 @@
   eslint = require('gulp-eslint');
 
   gulp.task('eslint', function () {
-    return gulp.src(paths.app + '/**/*.js')
+    var target = [
+      paths.app + '/**/*.js', 
+      '!'+paths.app+'/client/libs/**/*.js',
+      '!'+paths.app+'/server/views/include/**/*.js'
+    ];
+
+    return gulp.src(target)
       .pipe(eslint())
       .pipe(eslint.format())
       .pipe(eslint.failAfterError());

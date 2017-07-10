@@ -26,5 +26,12 @@
 		});
 	});
 
-	gulp.task('watch', ['watch:js', 'watch:scss']);
+	gulp.task('watch:html', function () {
+		watch([paths.app + '/client/**/*.{html, css}'], function (event) {
+			return gulp.src(event.path, {base: paths.app})
+				.pipe(gulp.dest(paths.tmp.app));
+		});
+	});
+
+	gulp.task('watch', ['watch:js', 'watch:scss', 'watch:html']);
 })();

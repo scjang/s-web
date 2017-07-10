@@ -35,12 +35,12 @@ Before you start, take a moment to see how the project structure looks like:
 
 You should install dependencies.
 ```
-npm install
+$ npm install
 ```
 
-Then you can start your new app by running `gulp serve`.
+Then you can start your new app by running `gulp` or `gulp serve`.
 ```
-gulp serve
+$ gulp
 ```
 
 ##  Build
@@ -48,6 +48,6 @@ gulp serve
 Run `gulp build`. This will build your project into the dist folder by default.
 
 ```
-gulp build
+$ gulp build
 ```
 

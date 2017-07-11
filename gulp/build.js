@@ -193,6 +193,7 @@
 		runSequence(
 			'eslint',
 			'clean:all',
+			'eslint',
 			'copy:client',
 			'styles',
 			['concat:components', 'concat:core', 'concat:libs', 'concat:libsCss'], 

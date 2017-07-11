@@ -9,7 +9,6 @@
 		createChildComponents: function () {
 			S.Components.App.Grape.callSuper(this, 'createChildComponents');
 			this.nav = new S.Components.App.Nav();
-			console.log('wow');
 		}
 	});
 })(S.$);

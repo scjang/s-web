@@ -34,6 +34,6 @@ var checkComplete = function () {
     console.log(page.content);
     phantom.exit();
   }
-}
+};
 // Let us check to see if the page is finished rendering
 var checkCompleteInterval = setInterval(checkComplete, 1);

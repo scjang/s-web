@@ -86,7 +86,7 @@
 				if (callback && typeof callback == 'function') {
 					callback();
 				}
-			}
+			};
 
 			src = '//connect.facebook.net/en_US/sdk.js';
 			this.injectScript(src, $('#fb-root')[0]);

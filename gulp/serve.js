@@ -4,17 +4,11 @@
 	var gulp, paths, nodemon, browserSync, reload, runSequence, argv;
 
 	gulp = require('gulp');
-
 	paths = gulp.paths;
-
 	nodemon = require('gulp-nodemon');
-
 	browserSync = require('browser-sync').create();
-
 	reload = browserSync.reload;
-
 	runSequence = require('run-sequence');
-
 	argv = require('yargs').argv;
 
 	gulp.task('nodemon', function (done) {
@@ -53,20 +47,15 @@
     });
   });
 
-	/**
-	 * This task uses the yargs module. 
-	 * So, you can pass an arguments for running different mode of app.
-	 * You have to excute build task before running production mode.
-	 * 
-	 * commands.  
-	 * gulp serve: running development mode
-	 * gulp serve --production: running production mode with dist directory
-	 */
-	gulp.task('serve', ['browser-sync'], function () {
-    gulp.watch([paths.app + '/client/**/*.*'], function () {
+	gulp.task('ready', ['browser-sync', 'watch'], function () {
+    gulp.watch([paths.tmp.app + '/client/**/*.*'], function () {
       reload();
     });
 	});
+
+  gulp.task('serve', function () {
+    runSequence('clean:tmp', 'copy:client', 'styles', 'ready');
+  });
 
   gulp.task('default', ['serve']);
 })();  

@@ -1,11 +1,12 @@
 (function () {
 	'use strict';
 
-	var gulp, paths;
+	var gulp, paths, $;
 	
 	gulp = require('gulp');
 	paths = gulp.paths;
-	
+	$ = require('gulp-load-plugins')();
+
 	gulp.task('copy:client', function () {
 		return gulp.src([paths.app + '/client/**/*.*'])
 			.pipe(gulp.dest(paths.tmp.app + '/client'));

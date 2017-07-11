@@ -1,21 +1,37 @@
 (function () {
 	'use strict';
 
-	var gulp, paths, runSequence;
+	var gulp, paths, eslint, sass, watch;
 
 	gulp = require('gulp');
 	paths = gulp.paths;
-	runSequence = require('run-sequence');
+	eslint = require('gulp-eslint');
+	sass = require('gulp-sass');
+	watch = require('gulp-watch');
 
-	/* todo. .tmp 디렉토리 이용하는 것 나중에 다시*/
-	gulp.task('watch', function () {
-		gulp.watch([
-			paths.app + '/client/**/*.{html,css,js}'
-		], [
-			// task
-		]);
-			// 1. watch를 하기 전에는 .tmp로 모두 이동시켜야만 한다?
-			// 2. app 디렉토리의 파일이 변경된 경우 .tmp로 복사 & 압축
-			// 3. .tmp 파일이 변경된 경우 browser-sync reload <- serve 태스크에서 실행
+	gulp.task('watch:js', function () {
+		watch([paths.app + '/client/**/*.js'], function (event) {
+      return gulp.src(event.path, {base: paths.app})
+      	.pipe(eslint())
+      	.pipe(eslint.format())
+				.pipe(gulp.dest(paths.tmp.app));
+    });
 	});
+
+	gulp.task('watch:scss', function () {
+		watch([paths.app + '/client/**/*.scss'], function (event) {
+			return gulp.src(event.path, {base: paths.app})
+				.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+				.pipe(gulp.dest(paths.tmp.app));
+		});
+	});
+
+	gulp.task('watch:html', function () {
+		watch([paths.app + '/client/**/*.{html, css}'], function (event) {
+			return gulp.src(event.path, {base: paths.app})
+				.pipe(gulp.dest(paths.tmp.app));
+		});
+	});
+
+	gulp.task('watch', ['watch:js', 'watch:scss', 'watch:html']);
 })();

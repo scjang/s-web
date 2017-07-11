@@ -189,15 +189,17 @@
       process.exit(0);
   });
 
-	gulp.task('build', function () {
+	gulp.task('build', function () {		
 		runSequence(
-			'clean:all', 
-			'copy:client', 
+			'eslint',
+			'clean:all',
+			'eslint',
+			'copy:client',
+			'styles',
 			['concat:components', 'concat:core', 'concat:libs', 'concat:libsCss'], 
 			'clean:app', 
 			['rev:components', 'rev:core', 'copy:server', 'copy:build'],
 			'finish'
 		);
 	});
-
 })();

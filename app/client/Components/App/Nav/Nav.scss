@@ -1,62 +1,73 @@
-.App_Nav > .nav {
-	position: absolute;
-	top: 0;
-	left: 0;
-	right: 0;
-	border-bottom: 1px solid #f1f1f1;
-	box-shadow: 1px 1px 1px #f1f1f1;
-	background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAACOCAMAAAAGqtgaAAAABGdBTUEAALGPC/xhBQAAAFFQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////CDfnXgAAABp0Uk5TEvX55vHu9PP38Oz48vrv6/bt/fvp/Oro/ufw9YDGAAAAa0lEQVRIx+XIRwqAUBBEQXPOWe9/UC/wFkIzwwdrWdEDoj/nBULMBfjlDvxyBX7ZA5NMgJotMMkKqDkBk4yBmgVQswRqdsAkM6BmDdQcgEnmQM0ZmGQD1ByBSR7ALzfglyfwyxuEmClQ87MXPAWqKb9V5AUAAAAASUVORK5CYII=);
-	z-index: 100;
-}
-.App_Nav .navbar_container {
-	max-width: 720px;
-	margin: 0 auto;
-	line-height: 34px;
-}
-.App_Nav .navbar-nav {
-	float: left;
-	margin: 0;
-}
-.App_Nav .navbar-nav > li {
-	float: left;
-}
-.App_Nav .navbar-nav > li > a,
-.App_Nav .navbar-nav > li > button {
-	display: table;
-  padding: 15px;
-  line-height: 34px;
-  font-size: 16px;
-  color: #555;
-  outline: none;
-  border: none;
-  background-color: transparent;
-}
-.App_Nav .navbar-nav > li > a > span,
-.App_Nav .navbar-nav > li > button > span {
-	display: table-cell;
-	vertical-align: middle;
-	text-align: center;
-	height: 35px;
-	width: 25px;
-}
-.App_Nav .badge {
-	position: absolute;
-	top: 13px;
-	right: 3px;
-	padding: 5px 7px;
-	border-radius: 500px;
-	background-color: red;
-}
-.App_Nav .brand img{
-	display: inline-block;
-	height: 26px;
-	padding: 5px 0;
-}
-.App_Nav .brand a {
-	font-size: 16px;
-	color: #555;
-}
-.App_Nav .profile_image {
-	width: 35px;
-	height: 35px;
+.App_Nav {
+
+  > .nav {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-bottom: 1px solid #f1f1f1;
+    box-shadow: 1px 1px 1px #f1f1f1;
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAACOCAMAAAAGqtgaAAAABGdBTUEAALGPC/xhBQAAAFFQTFRFAAAA////////////////////////////////////////////////////////////////////////////////////////////////////////CDfnXgAAABp0Uk5TEvX55vHu9PP38Oz48vrv6/bt/fvp/Oro/ufw9YDGAAAAa0lEQVRIx+XIRwqAUBBEQXPOWe9/UC/wFkIzwwdrWdEDoj/nBULMBfjlDvxyBX7ZA5NMgJotMMkKqDkBk4yBmgVQswRqdsAkM6BmDdQcgEnmQM0ZmGQD1ByBSR7ALzfglyfwyxuEmClQ87MXPAWqKb9V5AUAAAAASUVORK5CYII=);
+    z-index: 100;
+  }
+
+  .navbar_container {
+    max-width: 720px;
+    margin: 0 auto;
+    line-height: 34px;
+  }
+
+  .navbar-nav {
+    float: left;
+    margin: 0;
+
+    > li {
+      float: left;
+
+      > a,
+      > button {
+        display: table;
+        padding: 15px;
+        line-height: 34px;
+        font-size: 16px;
+        color: #555;
+        outline: none;
+        border: none;
+        background-color: transparent;
+
+        > span {
+          display: table-cell;
+          vertical-align: middle;
+          text-align: center;
+          height: 35px;
+          width: 25px;      
+        }
+      }
+    }
+  }
+
+  .badge {
+    position: absolute;
+    top: 13px;
+    right: 3px;
+    padding: 5px 7px;
+    border-radius: 500px;
+    background-color: red;
+  }
+
+  .brand img{
+    display: inline-block;
+    height: 26px;
+    padding: 5px 0;
+  }
+
+  .brand a {
+    font-size: 16px;
+    color: #555;
+  }
+
+  .profile_image {
+    width: 35px;
+    height: 35px;
+  }
 }

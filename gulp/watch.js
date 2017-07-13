@@ -1,12 +1,15 @@
 (function () {
 	'use strict';
 
-	var gulp, paths, eslint, sass, watch;
+	var gulp, paths, eslint, sass, sassLint, autoprefixer, postcss, watch;
 
 	gulp = require('gulp');
 	paths = gulp.paths;
 	eslint = require('gulp-eslint');
 	sass = require('gulp-sass');
+	sassLint = require('gulp-sass-lint');
+	autoprefixer = require('autoprefixer');
+	postcss = require('gulp-postcss');
 	watch = require('gulp-watch');
 
 	gulp.task('watch:js', function () {
@@ -20,8 +23,12 @@
 
 	gulp.task('watch:scss', function () {
 		watch([paths.app + '/client/**/*.scss'], function (event) {
+
 			return gulp.src(event.path, {base: paths.app})
+				.pipe(sassLint())
+		    .pipe(sassLint.failOnError())
 				.pipe(sass({outputStyle: 'compressed'}).on('error', sass.logError))
+				.pipe(postcss([autoprefixer()]))
 				.pipe(gulp.dest(paths.tmp.app));
 		});
 	});

@@ -5,7 +5,7 @@
   "author": "Jaecheol Lee <jclee.dev@gmail.com> (https://afrobambacar.github.io)",
   "main": "app/server/app.js",
   "scripts": {
-    "test": "vows --spec"
+    "test": "ls -al"
   },
   "engines": {
     "node": ">=4.0.0"
@@ -23,6 +23,7 @@
     "composable-middleware": "^0.3.0",
     "compression": "~1.7.0",
     "cookie-parser": "~1.4.3",
+    "ejs": "^2.5.6",
     "errorhandler": "~1.5.0",
     "express": "~4.13.4",
     "express-jwt": "^3.1.0",
@@ -36,7 +37,7 @@
     "passport-facebook": "^2.0.0",
     "passport-local": "^1.0.0",
     "phantomjs-prebuilt": "^2.1.12",
-    "request": "~2.80.0",
+    "request": "~2.81.0",
     "serve-favicon": "~2.0.1"
   },
   "devDependencies": {

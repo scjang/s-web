@@ -26,35 +26,35 @@ branches:
     - dontrunme 
     - test 
 
+cache:
+  directories:
+    - "node_modules"
+
 ## begin build steps
 ####################
 
 before_install:
 - npm -v
 
-cache:
-  directories:
-    - "node_modules"
-
-# install:
-#   - npm install gulp -g
+install:
+  - npm install
 
 before_script:
   - npm install -g gulp
 
+# test
 script: 
   - npm test
-  - gulp build
 
-# after_success:
-# - test $TRAVIS_PULL_REQUEST = false
-#   && git push
+after_success:
+  - test $TRAVIS_PULL_REQUEST = false
+    && git push
 
-# before_deploy:
+before_deploy:
 # # check that build passed successfully
 # # add the \ afterwards to tell travis it's part of the same command thanks @markhuge
-# - test $TRAVIS_TEST_RESULT = 0 \
-#   && gulp build \
+- test $TRAVIS_TEST_RESULT = 0 \
+  && gulp build
 #   && cd dist \
 #   && npm install --prod \
 #   && cd $TRAVIS_BUILD_DIR \

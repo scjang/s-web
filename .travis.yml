@@ -1,5 +1,81 @@
+# Set up notification options
+notifications: 
+  email:
+    recipients:
+      - jclee.dev@gmail.com
+
+    # change is when the repo status goes from pass to fail or vice versa
+    on_success: change
+    on_failure: always
+
+# specify language
 language: node_js
-sudo: false
-dist: trusty
+
+# specify language options
 node_js:
-  - "4"
+  - '4'
+
+# configure which branches to run
+branches:
+  # whitelist
+  only:
+    - master
+    - /^deploy-.*$/ # regex ok
+  # blacklist
+  except:
+    - dontrunme 
+    - test 
+
+## begin build steps
+####################
+
+before_install:
+- npm -v
+
+cache:
+  directories:
+    - "node_modules"
+
+# install:
+#   - npm install gulp -g
+
+before_script:
+  - npm install -g gulp-cli
+
+script: gulp build
+
+# after_success:
+# - test $TRAVIS_PULL_REQUEST = false
+#   && git push
+
+# before_deploy:
+# # check that build passed successfully
+# # add the \ afterwards to tell travis it's part of the same command thanks @markhuge
+# - test $TRAVIS_TEST_RESULT = 0 \
+#   && gulp build \
+#   && cd dist \
+#   && npm install --prod \
+#   && cd $TRAVIS_BUILD_DIR \
+#   && tar -zcvf amber-storm-$TRAVIS_BRANCH.tar.gz dist \
+#   && export PRODBUILDCOMPLETE=true
+
+## Deployment options
+####################
+
+# deploy:
+#   # specify the deployment provider
+#   provider: releases
+#   # options for provider
+#   api_key:
+#     secure: securekeyhere
+#   file: myrepo-$TRAVIS_BRANCH.tar.gz
+#   # conditions for deployment
+#   on:
+#     condition: $PRODBUILDCOMPLETE = true
+#     repo: myname/myrepo
+#     all_branches: true
+#     tags: true
+
+# after_deploy:
+#   - ssh git@mysite.biz "./deploy.sh $TRAVIS_BRANCH"
+

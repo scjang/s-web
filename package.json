@@ -4,7 +4,9 @@
   "version": "2.1.0",
   "author": "Jaecheol Lee <jclee.dev@gmail.com> (https://afrobambacar.github.io)",
   "main": "app/server/app.js",
-  "scripts": {},
+  "scripts": {
+    "test": "vows --spec"
+  },
   "engines": {
     "node": ">=4.0.0"
   },

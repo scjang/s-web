@@ -5,7 +5,7 @@
   "author": "Jaecheol Lee <jclee.dev@gmail.com> (https://afrobambacar.github.io)",
   "main": "app/server/app.js",
   "scripts": {
-    "test": "ls -al"
+    "test": "mocha"
   },
   "engines": {
     "node": ">=4.0.0"
@@ -61,14 +61,11 @@
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.7",
     "gulp-watch": "^4.3.11",
-    "jasmine-core": "^2.4.1",
-    "karma": "^1.2.0",
-    "karma-chrome-launcher": "^2.0.0",
-    "karma-jasmine": "^1.0.2",
-    "karma-phantomjs-launcher": "^1.0.1",
-    "karma-spec-reporter": "~0.0.31",
+    "karma": "^1.7.0",
+    "mocha": "^3.4.2",
     "require-dir": "^0.3.0",
     "run-sequence": "^2.0.0",
+    "should": "^11.2.1",
     "yargs": "^8.0.2"
   },
   "private": true

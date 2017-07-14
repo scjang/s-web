@@ -1,5 +1,7 @@
-var assert = require('assert');
-var should = require('should');
+'use strict';
+
+const assert = require('assert');
+const should = require('should');
 
 describe('Array', function() {
   describe('#indexOf()', function() {

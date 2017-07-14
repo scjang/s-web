@@ -105,8 +105,6 @@
 				paths.tmp.app + '/client/core/model.js',
 				paths.tmp.app + '/client/core/**/*.js',
 				paths.tmp.app + '/client/models/user.js',
-				paths.tmp.app + '/client/models/thing.js',
-				paths.tmp.app + '/client/models/search_items.js',
 				paths.tmp.app + '/client/models/**/*.js'
 			])
 			.pipe($.concat('s.min.js'))

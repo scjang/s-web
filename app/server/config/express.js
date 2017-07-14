@@ -38,7 +38,7 @@ module.exports = function (app) {
     app.use(express.static(path.join(config.root, '/dist/app/client')));
     app.set('appPath', path.join(config.root, '/dist/app/client'));
     
-    // todo. improve using glob!!!
+    // todo. improve using glob then cloudfront
     let dependencies = {
       css: 'libs/' + fs.readdirSync(path.join(app.get('appPath'), 'libs'))[0],
       libs: 'libs/' + fs.readdirSync(path.join(app.get('appPath'), 'libs'))[1],
@@ -61,37 +61,32 @@ module.exports = function (app) {
     app.use(express.static(path.join(config.root, '/.tmp/app/client')));
     app.set('appPath', path.join(config.root, '/.tmp/app/client'));
     app.use(errorHandler()); // Error handler - has to be last
-    
-    let appPath = [app.get('appPath'), '/'].join('');
+
     let baseDependencies = [
-      'libs/jquery.js',
-      'libs/underscore.js',
-      'libs/backbone.js',
-      'libs/js.cookie.js',
-      'core/s_base.js',
-      'core/component.js',
-      'core/utils.js',
-      'core/api.js',
-      'core/logger.js',
-      'core/app_init.js',
-      'core/loader.js',
-      'core/model.js',
-      'core/services.js',
-      'core/object_model.js',
-      'core/collection_utils.js',
-      'core/sparse_collection.js',
-      'core/router.js',
+      '/libs/jquery.js',
+      '/libs/underscore.js',
+      '/libs/backbone.js',
+      '/libs/js.cookie.js',
+      '/core/s_base.js',
+      '/core/component.js',
+      '/core/utils.js',
+      '/core/api.js',
+      '/core/logger.js',
+      '/core/app_init.js',
+      '/core/loader.js',
+      '/core/model.js',
+      '/core/services.js',
+      '/core/object_model.js',
+      '/core/collection_utils.js',
+      '/core/sparse_collection.js',
+      '/core/router.js',
     ];
-    let css = ['libs/bootstrap.min.css'];
-    let srcs = glob.sync(appPath + '{core,models,libs}/**/*.js');
-    let extraDependencies = [];
-
-    _.each(srcs, function (src) {
-      let dep = src.replace(appPath, '');
-      extraDependencies.push(dep);
+    let extraDependencies = glob.sync('/{core,models,libs}/**/*.js', {
+      root: app.get('appPath'),
+      nomount: 'disable'
     });
-
     let dependencies = _.union(baseDependencies, extraDependencies);
+    let css = ['/libs/bootstrap.min.css'];
 
     app.locals = {
       loaderVersion: {},

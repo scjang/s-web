@@ -1,5 +1,5 @@
 (function ($) {
-	S.Component.create('App.Nav', {
-		hasTemplate: true
-	});
+  S.Component.create('App.Nav', {
+    hasTemplate: true
+  });
 })(S.$);

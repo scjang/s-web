@@ -1,13 +1,12 @@
 (function () {
 	'use strict';
 
-	var gulp, path, paths, RevAll, autoprefixer, cssnano, runSequence, $, _;
+	var gulp, path, paths, RevAll, cssnano, runSequence, $, _;
 
 	gulp = require('gulp');
 	path = require('path');
 	paths = gulp.paths;
 	RevAll = require('gulp-rev-all');
-	autoprefixer = require('autoprefixer');
 	cssnano = require('cssnano');
 	runSequence = require('run-sequence');
 	_ = require('underscore');
@@ -68,7 +67,6 @@
 
 	gulp.task('cssmin', function () {
 		var processors = [
-			autoprefixer({browsers: ['last 5 versions']}),
 			cssnano({zindex: false})
 		];
 

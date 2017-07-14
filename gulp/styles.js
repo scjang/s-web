@@ -1,10 +1,11 @@
 (function () {
 	'use strict';
 
-	var gulp, paths, $, sass;
+	var gulp, paths, $, autoprefixer, sass;
 
 	gulp = require('gulp');
 	paths = gulp.paths;
+	autoprefixer = require('autoprefixer');
 	$ = require('gulp-load-plugins')();
 
 	/**
@@ -14,7 +15,10 @@
 	 */
 	gulp.task('styles', function () {
 		return gulp.src([paths.app + '/**/*.scss'])
+			.pipe($.sassLint())
+			.pipe($.sassLint.failOnError())
 			.pipe($.sass({outputStyle: 'compressed'}).on('error', $.sass.logError))
+			.pipe($.postcss([autoprefixer()]))
 			.pipe(gulp.dest(paths.tmp.app));
 	});
 })();

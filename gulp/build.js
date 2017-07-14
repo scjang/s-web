@@ -9,7 +9,7 @@
 	RevAll = require('gulp-rev-all');
 	cssnano = require('cssnano');
 	runSequence = require('run-sequence');
-	_ = require('underscore');
+	_ = require('lodash');
 	$ = require('gulp-load-plugins')();
 
 	function getComponentInfo (file) {

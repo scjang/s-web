@@ -45,6 +45,8 @@ before_script:
 # test
 script: 
   - npm test
+  - test $TRAVIS_TEST_RESULT = 0 \
+    && gulp build
 
 # after_success:
 #   - test $TRAVIS_PULL_REQUEST = false
@@ -53,8 +55,8 @@ script:
 before_deploy:
 # # check that build passed successfully
 # # add the \ afterwards to tell travis it's part of the same command thanks @markhuge
-- test $TRAVIS_TEST_RESULT = 0 \
-  && gulp build
+# - test $TRAVIS_TEST_RESULT = 0 \
+#   && gulp build
 #   && cd dist \
 #   && npm install --prod \
 #   && cd $TRAVIS_BUILD_DIR \
@@ -66,7 +68,7 @@ before_deploy:
 
 # deploy:
 #   # specify the deployment provider
-#   provider: releases
+  # provider: releases
 #   # options for provider
 #   api_key:
 #     secure: securekeyhere

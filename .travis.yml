@@ -42,7 +42,9 @@ cache:
 before_script:
   - npm install -g gulp
 
-script: gulp build
+script: 
+  - npm test
+  - gulp build
 
 # after_success:
 # - test $TRAVIS_PULL_REQUEST = false

@@ -5,7 +5,7 @@ Scaffold out a Backbone.js, Express.js, PhantomJS and Gulp
 ## Status
 
 [![Build Status](https://travis-ci.org/afrobambacar/s-web.svg?branch=master)](https://travis-ci.org/afrobambacar/s-web)
-[![devDependency Status](https://img.shields.io/david/dev/afrobambacar/s-web.svg)](https://david-dm.org/afrobambacar/s-web?type=dev)
+[![dependencies Status](https://david-dm.org/afrobambacar/s-web/status.svg)](https://david-dm.org/afrobambacar/s-web)
 
 
 ## Directory Layout

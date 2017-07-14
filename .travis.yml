@@ -44,11 +44,11 @@ before_script:
 
 # test
 script: 
-  - npm test
+  - ls -al
 
-after_success:
-  - test $TRAVIS_PULL_REQUEST = false
-    && git push
+# after_success:
+#   - test $TRAVIS_PULL_REQUEST = false
+#     && git push
 
 before_deploy:
 # # check that build passed successfully

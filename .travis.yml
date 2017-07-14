@@ -52,7 +52,7 @@ after_success:
   # - test $TRAVIS_PULL_REQUEST = false
   #   && git push
 
-before_deploy:
+# before_deploy:
 # # check that build passed successfully
 # # add the \ afterwards to tell travis it's part of the same command thanks @markhuge
 # - test $TRAVIS_TEST_RESULT = 0 \

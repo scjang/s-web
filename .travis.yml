@@ -40,7 +40,7 @@ cache:
 #   - npm install gulp -g
 
 before_script:
-  - npm install -g gulp-cli
+  - npm install -g gulp
 
 script: gulp build
 

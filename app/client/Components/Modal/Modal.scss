@@ -1,0 +1,33 @@
+.Modal {
+	.modal_container {
+		position: fixed;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		color: #333;
+	}
+	.overlay {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		right: 0;
+		background-color: #fff;
+		opacity: 0.5;
+	}
+	.popup_container {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		right: initial;
+		bottom: initial;
+		padding: 0;
+		margin-left: -300px;
+		margin-top: -250px;
+		background-color: transparent;
+		border: none;
+		z-index: 13;
+		overflow-y: scroll;
+	}
+}

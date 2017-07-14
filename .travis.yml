@@ -47,10 +47,12 @@ script:
   - npm test
 
 after_success:
-  - test $TRAVIS_TEST_RESULT = 0 \
-    && gulp build
+  - gulp build
   # - test $TRAVIS_PULL_REQUEST = false
   #   && git push
+
+after_failure:
+  - exit 1
 
 # before_deploy:
 # # check that build passed successfully

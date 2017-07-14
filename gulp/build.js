@@ -1,12 +1,12 @@
 (function () {
 	'use strict';
 
-	var gulp, path, paths, RevAll, cssnano, runSequence, $, _;
+	var gulp, path, paths, revAll, cssnano, runSequence, $, _;
 
 	gulp = require('gulp');
 	path = require('path');
 	paths = gulp.paths;
-	RevAll = require('gulp-rev-all');
+	revAll = require('gulp-rev-all');
 	cssnano = require('cssnano');
 	runSequence = require('run-sequence');
 	_ = require('lodash');
@@ -139,7 +139,7 @@
 	});
 
 	gulp.task('rev:components', function () {
-		var revAll = new RevAll({
+		var options = {
 			fileNameVersion: 'version.json',
 			fileNameManifest: 'components.json',
 			annotator: function(contents, path) {
@@ -149,11 +149,11 @@
 			replacer: function(fragment, replaceRegExp, newReference, referencedFile) {
 			     fragment.contents = fragment.contents;
 			}
-		});
+		};
 		
 		return gulp.src([paths.tmp.components + '/*'])
 			.pipe($.debug({title: 'hashing: '}))
-			.pipe(revAll.revision())
+			.pipe(revAll.revision(options))
 			.pipe(gulp.dest(paths.dist + '/app/client/Components'))
 			.pipe(revAll.manifestFile())
 			.pipe(gulp.dest(paths.dist + '/app'))
@@ -164,7 +164,7 @@
 	});
 
 	gulp.task('rev:core', function () {
-		var revAll = new RevAll({
+		var options = {
 			annotator: function(contents, path) {
 			    var fragments = [{'contents': contents}];
 			    return fragments;
@@ -172,10 +172,10 @@
 			replacer: function(fragment, replaceRegExp, newReference, referencedFile) {
 			     fragment.contents = fragment.contents;
 			}
-		});
+		};
 
 		return gulp.src([paths.tmp.client + '/{core,libs}/*.*'])
-			.pipe(revAll.revision())
+			.pipe(revAll.revision(options))
 			.pipe(gulp.dest(paths.dist + '/app/client'))
 			.pipe($.debug({title: 'rev:core was finished!'}));
 	});

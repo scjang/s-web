@@ -34,7 +34,7 @@
 	});
 
 	gulp.task('watch:html', function () {
-		watch([paths.app + '/client/**/*.{html, css}'], function (event) {
+		watch([paths.app + '/client/**/*.{html,css}'], function (event) {
 			return gulp.src(event.path, {base: paths.app})
 				.pipe(gulp.dest(paths.tmp.app));
 		});

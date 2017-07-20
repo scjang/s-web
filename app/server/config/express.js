@@ -86,7 +86,7 @@ module.exports = function (app) {
       nomount: 'disable'
     });
     let dependencies = _.union(baseDependencies, extraDependencies);
-    let css = ['/libs/bootstrap.min.css'];
+    let css = ['/libs/bootstrap.css'];
 
     app.locals = {
       loaderVersion: {},

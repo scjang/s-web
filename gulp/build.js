@@ -118,11 +118,16 @@
         paths.tmp.libs + '/jquery.js',
         paths.tmp.libs + '/underscore.js',
         paths.tmp.libs + '/backbone.js',
-        paths.tmp.libs + '/moment.min.js',
+        paths.tmp.libs + '/moment.js',
         paths.tmp.libs + '/**/*.js'
       ])
-      .pipe($.concat('libs.min.js'))
-      .pipe($.uglify({ output: { quote_style: 1 }}))
+      .pipe($.sourcemaps.init())
+        .pipe($.concat('libs.min.js'))
+        .pipe($.uglify({ output: { quote_style: 1 }}))
+      .pipe($.sourcemaps.write('.', {
+        includeContent: false,
+        sourceMappingURLPrefix: 'https://asset-host.example.com/assets'
+      }))
       .pipe(gulp.dest(paths.tmp.libs))
       .pipe($.debug({title: 'concat:libs finished!'}));
   });
@@ -132,7 +137,7 @@
     return gulp.src([
       paths.tmp.libs + '/**/*.css'
     ])
-    .pipe($.concat('bootstrap.min.css'))
+    .pipe($.concat('bootstrap.css'))
     .pipe($.postcss(processors))
     .pipe(gulp.dest(paths.tmp.libs))
     .pipe($.debug({title: 'concat:libsCss finished!'}));
@@ -182,7 +187,7 @@
 
   gulp.task('replace', function () {
     var version = require('../dist/app/version.json').hash;
-    // console.log('.... ', version);
+
     return gulp.src([paths.config + '/index.js'])
       .pipe($.replace('@version', version))
       .pipe(gulp.dest(paths.config));

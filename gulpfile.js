@@ -13,7 +13,8 @@
       client: '.tmp/app/client',
       components: '.tmp/app/client/Components',
       core: '.tmp/app/client/core',
-      libs: '.tmp/app/client/libs'
+      libs: '.tmp/app/client/libs',
+      maps: '.tmp/app/client/maps'
     },
     spec: 'spec',
     specUt: 'spec/ut',

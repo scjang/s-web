@@ -97,6 +97,7 @@ module.exports = function (app) {
 
   app.locals.serverInfo = {
     app_name: config.app_name,
+    version: config.version,
     base_component: 'App.Grape',
     google_tracking_id: config.google.tracking_id,
     facebook_app_id: config.facebook.client_id,

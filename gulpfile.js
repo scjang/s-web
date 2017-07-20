@@ -16,7 +16,8 @@
       libs: '.tmp/app/client/libs'
     },
     spec: 'spec',
-    specUt: 'spec/ut'
+    specUt: 'spec/ut',
+    config: 'dist/app/server/config/environment',
   };
 
   require('require-dir')('./gulp');

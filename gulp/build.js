@@ -183,7 +183,7 @@
   gulp.task('replace', function () {
     var version = require('../dist/app/version.json').hash;
     // console.log('.... ', version);
-    return gulp.src([paths.config + '/production.js'])
+    return gulp.src([paths.config + '/index.js'])
       .pipe($.replace('@version', version))
       .pipe(gulp.dest(paths.config));
   });

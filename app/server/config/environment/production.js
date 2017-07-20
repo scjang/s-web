@@ -7,6 +7,5 @@ var path = require('path');
 module.exports = {
 	api_server: 'http://api.wouzoo.com',
   root: path.normalize(__dirname + '/../../../../..'),
-  version: '@version',
   port: 9000
 };

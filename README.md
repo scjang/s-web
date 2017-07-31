@@ -2,6 +2,13 @@
 
 Scaffold out a Backbone.js, Express.js, PhantomJS and Gulp
 
+## Status
+
+[![Build Status](https://travis-ci.org/afrobambacar/s-web.svg?branch=master)](https://travis-ci.org/afrobambacar/s-web)
+[![dependencies Status](https://david-dm.org/afrobambacar/s-web/status.svg)](https://david-dm.org/afrobambacar/s-web)
+[![devDependencies Status](https://david-dm.org/afrobambacar/s-web/dev-status.svg)](https://david-dm.org/afrobambacar/s-web?type=dev)
+
+
 ## Directory Layout
 
 Before you start, take a moment to see how the project structure looks like:

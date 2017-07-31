@@ -15,6 +15,11 @@
 			return val;
 		},
 
+		stopEvent: function (e) {
+			e.preventDefault();
+      e.stopPropagation();
+		},
+		
 		convertHashtagtoLink: function (str) {
 			var regexp = /(?:#[a-zA-Zㄱ-힣_]+)(?!60|27)/g;
   		str = str.replace(regexp, function (tag) {
